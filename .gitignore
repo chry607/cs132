@@ -11,9 +11,6 @@ venv/
 # Generated output
 outputs/
 
-# Large dataset — do not upload by default
-PHL-PSA-SOF-2024-PUF 2/
-
 # OS/editor files
 .DS_Store
 .vscode/
