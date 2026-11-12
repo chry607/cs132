@@ -1,0 +1,10 @@
+test,n,statistic,pvalue,df
+H1 occupation adjusted for origin,3931,303.8183469646434,4.042398605728481e-60,9
+H1 NCR origin adjusted for occupation,3931,8.301611762780702,0.003960990997203772,1
+H2 sex adjusted for marital/destination/contract,2655,43.34471472053889,4.589742891816046e-11,1
+H2 marital status adjusted for sex/destination/contract,2655,36.20916292838238,1.3717664375101812e-08,2
+H2 destination region adjusted for sex/marital/contract,2655,13.459672578372281,0.06166969415318648,7
+H2 contract adjusted for sex/marital/destination,2655,0.9027096127818055,0.3420562019397047,1
+H3 urban-rural location terms,2702,59.16499829772688,1.4206394115103354e-13,2
+H3 island group terms,2702,607.5918363125452,5.371580546868423e-128,6
+H3 all location terms jointly,2702,1687.004570589874,0.0,8
