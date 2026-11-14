@@ -2,17 +2,33 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
+
+from data import ROOT
 
 ABOVE, BELOW, SAME = "#1e3a8a", "#5b8ad8", "#c4c4c4"
 TRACK, INK, MUTED = "#f2f5fa", "#0f1e3d", "#5b6880"
-FONTS = ["Avenir Next", "Helvetica Neue", "DejaVu Sans"]
+FONTS = ["Roboto", "DejaVu Sans"]
+
+for font in (ROOT / ".plain_map_assets" / "assets" / "fonts").glob("*.ttf"):
+	font_manager.fontManager.addfont(str(font))
+
+
+def fit_text(fig, text, max_x=0.96, min_size=14):
+	renderer = fig.canvas.get_renderer()
+	while text.get_fontsize() > min_size:
+		box = text.get_window_extent(renderer).transformed(fig.transFigure.inverted())
+		if box.x1 <= max_x:
+			break
+		text.set_fontsize(text.get_fontsize() - 0.5)
+	return text
 
 
 def new_slide(title, subtitle):
 	plt.rcParams["font.family"] = FONTS
 	fig = plt.figure(figsize=(13.33, 7.5), facecolor="white")
-	fig.text(0.04, 0.905, title, fontsize=24, weight="bold", color=INK, va="baseline")
-	fig.text(0.04, 0.866, subtitle, fontsize=13, color=MUTED, va="baseline")
+	fit_text(fig, fig.text(0.04, 0.905, title, fontsize=24, weight="bold", color=INK, va="baseline"))
+	fit_text(fig, fig.text(0.04, 0.866, subtitle, fontsize=13, color=MUTED, va="baseline"), min_size=9)
 	return fig
 
 

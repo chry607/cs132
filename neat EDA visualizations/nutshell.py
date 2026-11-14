@@ -20,7 +20,7 @@ THEMES = {
 	"deck": dict(
 		background="white", text="#0f1e3d", muted="#5b6880", divider="#e3e8f0",
 		map_colors=["#dbe5f5", "#93b4e8", "#5b8ad8", "#1e3a8a"], map_side="#c3cee0", outline="white", accent="#1e3a8a",
-		font=["Avenir Next", "Helvetica Neue", "Roboto"], title=dict(y=103, size=48, va="baseline"),
+		font=["Roboto"], title=dict(y=103, size=48, va="baseline"),
 		subtitle=dict(y=145, size=26, va="baseline"), name="nutshell"),
 	"course": dict(
 		background="#1B181C", text="#FFFFFF", muted="#C8C1CB", divider="#3A333D",
