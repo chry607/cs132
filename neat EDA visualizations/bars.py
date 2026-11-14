@@ -5,9 +5,6 @@ import statsmodels.formula.api as smf
 from data import wmean
 from style import ABOVE, BELOW, INK, MUTED, SAME, TRACK, centre_x, finish, legend, move_x, new_slide
 
-SIG_NOTE = "Bar color shows direction vs. the overall average; gray bar fills indicate no clear difference (weighted, household-clustered)."
-
-
 def rates_by(base, col, min_n=0):
 	df = base.dropna(subset=[col])
 	rows = {}
@@ -82,8 +79,7 @@ def make_h1(data, out):
 	overall = 100 * wmean(base["y"], base["RSWGT"])
 	subtitle_1 = "Percentage of OFWs that left for contractual work by prior profession compared to the 80% national average"
 	subtitle_2 = "Percentage of OFWs that left for contractual work by region compared to the 80% national average"
-	source = ("Source: PSA 2024 Survey on Overseas Filipinos (PUF), n = 3,931. n per bar = unweighted respondents. "
-		+ SIG_NOTE.format(who="respondents"))
+	source = ("Source: PSA 2024 Survey on Overseas Filipinos (PUF), n = 3,931. n per bar = unweighted respondents.")
 
 	occ, _ = rates_by(base, "occupation")
 	occ.index = occ.index.str.replace("Non-gainful", "No paid work (non-gainful)")
@@ -105,7 +101,7 @@ def make_h2(data, out):
 	subtitle_1 = "Percentage of remittance-receiving households that put any of the money into savings by gender and relationship status compared to the 48% national average"
 	subtitle_2 = "Percentage of remittance-receiving households that put any of the money into savings by country of work of OFW compared to the 48% national average"
 	source = (f"Source: PSA 2024 Survey on Overseas Filipinos (PUF); {len(base):,} households that received cash remittances (C27). "
-		"n per bar = unweighted. " + SIG_NOTE.format(who="households"))
+		"n per bar = unweighted.")
 
 	sex, _ = rates_by(base, "sex")
 	marital, _ = rates_by(base, "marital_status")
@@ -126,7 +122,7 @@ def make_h3(data, out):
 	overall = 100 * wmean(base["y"], base["RSWGT"])
 	subtitle = "Share of households receiving remittances through money-transfer services (e.g., Western Union) rather than a bank, survey-weighted"
 	source = (f"Source: PSA 2024 Survey on Overseas Filipinos (PUF); {len(base):,} households that reported a remittance channel (C26); door-to-door (n=3) excluded.\n"
-		"n per bar = unweighted. " + SIG_NOTE.format(who="households"))
+		"n per bar = unweighted. Color differs from all ohter households at p < 0.05 (weighted, household-clustered)")
 
 	urban, _ = rates_by(base, "urban_rural")
 	island, _ = rates_by(base, "region_group")
@@ -137,4 +133,4 @@ def make_h3(data, out):
 		note="NCR is entirely urban, so the region and urban/rural gaps overlap; both stay significant when modelled together (p < 0.001).")
 	bar_slide(out / "h3_urban_rural.png", [("", urban)],
 		"Rural households use money-transfer services more than urban ones", subtitle, overall, "All households", [(ABOVE, "Above average"), (BELOW, "Below average")], source,
-		note=f"Rural households are {gap:.0f} percentage points more likely to use a money-transfer service.", x0=x0)
+		note=f"Rural households are ~{gap:.0f} percentage points more likely to use a money-transfer service.", x0=x0)
