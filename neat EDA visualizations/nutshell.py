@@ -19,7 +19,7 @@ from data import DATA_PATH, ROOT
 THEMES = {
 	"deck": dict(
 		background="white", text="#0f1e3d", muted="#5b6880", divider="#e3e8f0",
-		map_colors=["#dbe5f5", "#93b4e8", "#5b8ad8", "#1e3a8a"], map_side="#c3cee0", outline="white", accent="#1e3a8a",
+		map_colors=["#dbe5f5", "#93b4e8", "#5b8ad8", "#000033"], map_side="#c3cee0", outline="white", accent="#1e3a8a",
 		font=["Avenir Next", "Helvetica Neue", "Roboto"], title=dict(y=103, size=48, va="baseline"),
 		subtitle=dict(y=145, size=26, va="baseline"), name="nutshell"),
 	"course": dict(
@@ -115,7 +115,7 @@ def make_nutshell(out, theme="deck"):
 		return MplPath(np.asarray(verts), codes)
 
 	cmap = colors.LinearSegmentedColormap.from_list("mt", t["map_colors"])
-	norm = colors.Normalize(vmin=30, vmax=100, clip=True)
+	norm = colors.Normalize(vmin=0, vmax=100, clip=True)
 	plt.rcParams.update({"font.family": t["font"], "pdf.fonttype": 42, "svg.fonttype": "none"})
 	fig = plt.figure(figsize=(6.4, 3.6), dpi=300, facecolor=t["background"])
 	ax = fig.add_axes([0, 0, 1, 1])
@@ -143,8 +143,8 @@ def make_nutshell(out, theme="deck"):
 		label(tx, ty, f"{name} {region_mt[r]:.0f}%", size=23)
 
 	label(80, 186, MAP_LEGEND, size=21, weight="bold")
-	ax.imshow(np.linspace(30, 100, 400).reshape(1, -1), extent=(80, 480, 242, 222), cmap=cmap, norm=norm, aspect="auto")
-	for x, value, ha in [(94, "30%", "left"), (280, "65%", "center"), (466, "100%", "right")]:
+	ax.imshow(np.linspace(0, 100, 400).reshape(1, -1), extent=(80, 480, 242, 222), cmap=cmap, norm=norm, aspect="auto")
+	for x, value, ha in [(94, "0%", "left"), (280, "50%", "center"), (466, "100%", "right")]:
 		label(x, 248, value, size=18, color=t["muted"], ha=ha)
 
 	ax.plot([1230, 1230], [205, 930], color=t["divider"], linewidth=0.6)
