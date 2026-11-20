@@ -104,6 +104,7 @@ def load_data() -> pd.DataFrame:
 		lambda value: REMIT_MODE_GROUPS.get(int(value)) if pd.notna(value) else np.nan
 	)
 	data["mode_code"] = data["mode"].map({"Formal Bank": 0, "Door-to-door": 1, "OTC": 2})
+	data["non_bank_num"] = data["mode"].ne("Formal Bank").astype(float).where(data["mode"].notna())
 	return data
 
 def wmean(values: pd.Series, weights: pd.Series) -> float:

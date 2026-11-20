@@ -1,5 +1,6 @@
 from bars import make_h1, make_h2, make_h3
 from data import ROOT, load_data
+from hypothesis_tests import make_hypothesis_tests
 from models import make_rq2, make_rq3
 from nutshell import make_nutshell
 
@@ -16,6 +17,7 @@ def main():
 	make_rq3(data, OUT)
 	make_nutshell(OUT, "deck")
 	make_nutshell(OUT, "course")
+	make_hypothesis_tests(data, OUT)
 	print(f"Slides saved to {OUT}")
 
 
